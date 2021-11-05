@@ -1,5 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "Tilemap.h"
+#include <map>
+
+using namespace std;
+using namespace sf;
+typedef Vector2f vec2;
+typedef Vector2i vec2i;
+
+
 using namespace sf;
 /*
 Dans cet example, vous allez devoir charger et afficher un tileset
@@ -20,7 +28,7 @@ Il sera nécessaire de charger deux grilles de tiles, la première étant celle du 
 
 */
 
-namespace level {
+
     map<string, vec2i> tile_offsets = {
         { "convex_angle1", {0,0}},    //
         { "convex_angle2", {1,0}},    //
@@ -144,12 +152,46 @@ namespace level {
         "R1 RH R4 R3 R2 FW -- -- -- -- -- -- ",
 
     };
+
+Sprite Tilemap::loadLevel(Texture &t)
+{
+    sf::Sprite sprite;
+    Vector2i v = tile_offsets.find(aliasses.find("GD")->second)->second;
+    sf::IntRect rect(v * 16, { 16,16 });
+    sprite.Sprite::setTextureRect(rect);
+    sprite.setTexture(t);
+    sprite.scale(3, 3);
+    return sprite;
 }
 
 
-int main()
+
+/*map<string, sf::RectangleShape> sprite_carte;
+    Texture texture_map;
+    texture_map.loadFromFile("foresttiles2-t");
+    for (auto& p:level::aliasses) {
+        string loc_title = p.first;
+        vec2i loc_posi = level::tile_offsets[p.second];
+        texture_map.loadFromFile("foresttiles2-t", IntRect(loc_posi.x * 16, loc_posi.y * 16, 16, 16));
+        RectangleShape locale_shape(Vector2f(16, 16));
+        locale_shape.setTexture(texture_map);
+    }*/
+
+
+
+/*int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    //sf::CircleShape shape(100.f);
+    //shape.setFillColor(sf::Color::Green);
+    Texture texture;
+    //texture.loadFromFile("ghost.png");
+    texture.loadFromFile("foresttiles2-t.png");
+    Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setScale(4, 4);
+    sprite.setTextureRect(IntRect(Vector2i(20,24),Vector2i(30,33)));
+    // https://imgur.com/a/vVmZnXt
 
     while (window.isOpen())
     {
@@ -161,10 +203,10 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        //window.draw(shape);
         window.draw(sprite);
         window.display();
     }
 
     return 0;
-}
+}*/
