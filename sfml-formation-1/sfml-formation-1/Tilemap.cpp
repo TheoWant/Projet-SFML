@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Tilemap.h"
+#include <iostream>
 #include <map>
 
 using namespace std;
@@ -84,6 +85,7 @@ Il sera nécessaire de charger deux grilles de tiles, la première étant celle du 
         { "tree_top", {4,3}},         //
         { "nothing", {0,7}}
     };
+
     map<string, string> aliasses = {
 
         { "A1", "convex_angle1" },
@@ -153,60 +155,64 @@ Il sera nécessaire de charger deux grilles de tiles, la première étant celle du 
 
     };
 
-Sprite Tilemap::loadLevel(Texture &t)
+    // vector<sf::Sprite> Tilemap::loadLevel(Texture& t)
+    void Tilemap::loadLevel(Texture& t)
+    {
+
+        int y = 0;
+        for (auto& str : tile_strings) {
+            for (int i = 0; i < 36; i += 3)
+            {
+                Sprite sprite;
+                Sprite spriteBack;
+
+                std::string b = str.substr(i, 2);
+
+                if (b == "  ") {
+                    b = "GD";
+                }
+
+                Vector2i v = tile_offsets.find(aliasses.find(b)->second)->second;
+                Vector2i back = tile_offsets.find(aliasses.find("GD")->second)->second;
+
+                sf::IntRect rect(v * 16, { 16,16 });
+                sf::IntRect rectBack(back * 16, { 16,16 });
+
+                sprite.setTextureRect(rect);
+                spriteBack.setTextureRect(rectBack);
+                sprite.setTexture(t);
+                spriteBack.setTexture(t);
+
+                sprite.scale(3, 3);
+                spriteBack.scale(3, 3);
+
+                sprite.setPosition(i * 16, y * 16 * 3);
+                spriteBack.setPosition(i * 16, y * 16 * 3);
+
+
+                Tiles.push_back(sprite);
+                TilesBack.push_back(spriteBack);
+
+            }
+            y++;
+        }
+        /*return sprites;*/
+    }
+
+
+void Tilemap::draw(RenderWindow& window)
 {
-    sf::Sprite sprite;
-    Vector2i v = tile_offsets.find(aliasses.find("GD")->second)->second;
-    sf::IntRect rect(v * 16, { 16,16 });
-    sprite.Sprite::setTextureRect(rect);
-    sprite.setTexture(t);
-    sprite.scale(3, 3);
-    return sprite;
+    
+    for (auto& t : TilesBack)
+    {
+        window.draw(t);
+    }
+
+    for (auto& t : Tiles)
+    {
+        window.draw(t);
+    }
 }
 
 
 
-/*map<string, sf::RectangleShape> sprite_carte;
-    Texture texture_map;
-    texture_map.loadFromFile("foresttiles2-t");
-    for (auto& p:level::aliasses) {
-        string loc_title = p.first;
-        vec2i loc_posi = level::tile_offsets[p.second];
-        texture_map.loadFromFile("foresttiles2-t", IntRect(loc_posi.x * 16, loc_posi.y * 16, 16, 16));
-        RectangleShape locale_shape(Vector2f(16, 16));
-        locale_shape.setTexture(texture_map);
-    }*/
-
-
-
-/*int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    //sf::CircleShape shape(100.f);
-    //shape.setFillColor(sf::Color::Green);
-    Texture texture;
-    //texture.loadFromFile("ghost.png");
-    texture.loadFromFile("foresttiles2-t.png");
-    Sprite sprite;
-    sprite.setTexture(texture);
-    sprite.setScale(4, 4);
-    sprite.setTextureRect(IntRect(Vector2i(20,24),Vector2i(30,33)));
-    // https://imgur.com/a/vVmZnXt
-
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        //window.draw(shape);
-        window.draw(sprite);
-        window.display();
-    }
-
-    return 0;
-}*/
