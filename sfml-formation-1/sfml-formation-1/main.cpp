@@ -1,20 +1,23 @@
 #include <SFML/Graphics.hpp>
 #include <map>
+#include "Tilemap.h"
 
 using namespace std;
 using namespace sf;
 typedef Vector2f vec2;
 typedef Vector2i vec2i;
 
-#include "Tilemap.h"
+
 
 int main()
 {
+    RenderWindow window(sf::VideoMode(550, 380), "SFML works!");
     Tilemap T;
     Texture maptexture;
     maptexture.loadFromFile("foresttiles2-t.png");
+    T.loadLevel(maptexture);
     
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -25,7 +28,9 @@ int main()
         }
 
         window.clear();
-        window.draw(T.loadLevel(maptexture));
+        
+        T.draw(window);
+        
         window.display();
     }
 
