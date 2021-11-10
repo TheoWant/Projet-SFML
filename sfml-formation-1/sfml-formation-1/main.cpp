@@ -21,6 +21,8 @@ int main()
     Player player;
     Enemy ghost;
 
+    Vector2i anim(48, 0);
+
     playerTexture.loadFromFile("characters.png");
     maptexture.loadFromFile("foresttiles2-t.png");
 
@@ -38,14 +40,14 @@ int main()
                 window.close();
         }
 
-
+        player.getSprite().setTextureRect(IntRect(48, 0, 16, 16));
         player.movePlayer();
 
         window.clear();
 
         T.draw(window);
-        window.draw(player.getSprite());
         window.draw(ghost.getSprite());
+        window.draw(player.getSprite());
         window.display();
         
     }
