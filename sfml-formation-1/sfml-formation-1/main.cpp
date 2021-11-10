@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <map>
 #include "Tilemap.h"
+#include "enemy.h"
+#include "player.h"
 
 using namespace std;
 using namespace sf;
@@ -13,10 +16,18 @@ int main()
 {
     RenderWindow window(sf::VideoMode(550, 380), "SFML works!");
     Tilemap T;
-    Texture maptexture;
+    Texture maptexture, enemyTexture, playerTexture;
+
+    Player player;
+    Enemy ghost;
+
+    playerTexture.loadFromFile("characters.png");
     maptexture.loadFromFile("foresttiles2-t.png");
+
     T.loadLevel(maptexture);
-    
+    player.loadPlayer(playerTexture);
+    ghost.loadEnemy(enemyTexture);
+   
 
     while (window.isOpen())
     {
@@ -27,11 +38,16 @@ int main()
                 window.close();
         }
 
+
+        player.movePlayer();
+
         window.clear();
-        
+
         T.draw(window);
-        
+        window.draw(player.getSprite());
+        window.draw(ghost.getSprite());
         window.display();
+        
     }
 
     return 0;
