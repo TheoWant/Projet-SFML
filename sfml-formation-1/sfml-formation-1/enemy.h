@@ -9,6 +9,8 @@ public:
 
 	void loadEnemy(sf::Texture& t);
 	void animate();
+
+	void update(float delta);
 	void draw(sf::RenderWindow& window);
 
 	sf::Sprite getSprite() { return _enemySprite; };
