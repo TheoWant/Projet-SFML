@@ -13,17 +13,16 @@ void Player::loadPlayer(Texture& playerTexture)
 
 void Player::animate(int spritePosY)
 {
-    Clock clock;
-    
-    _playerSprite.setTextureRect(IntRect(48, spritePosY, 16, 16));
     
     IntRect playerRect(_playerSprite.getTextureRect());
 
-    int elapsedTimeInSeconds = clock.getElapsedTime().asSeconds();
+    playerRect.top = spritePosY;
 
-    if (elapsedTimeInSeconds > 1.0f )
+    float elapsedTimeInSeconds = clock.getElapsedTime().asSeconds();
+
+    if (elapsedTimeInSeconds > 0.1f )
     {
-        if (playerRect.left == 70)
+        if (playerRect.left == 80)
         {
             playerRect.left = 48;
         }
@@ -33,54 +32,49 @@ void Player::animate(int spritePosY)
         }
 
         _playerSprite.setTextureRect(playerRect);
-
         clock.restart();
+
     }
+
+    
+
+   /* int spriteSize = 16;
+
+    anim.x += spriteSize;
+    if (anim.x == 80)
+    {
+        anim.x = 48;
+    }
+    _playerSprite.setTextureRect(IntRect(anim.x, anim.y, spriteSize, spriteSize));*/
+
+    
 }
 
 void Player::movePlayer()
 {
-    /*enu Direction { Down, Left, Right, Up};
-    Vector2i anim(1, Down);
-
-    int spriteSize = 16;
-    int spriteStartPosX = spriteSize * 3;
-    int spriteEndPosX = spriteStartPosX + (spriteSize * 2);*/
-
-
+    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         this->animate(0);
-        /*anim.y = Down;*/
         _playerSprite.move(0, 0.2f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         this->animate(16);
-        /*anim.y = Left;*/
         _playerSprite.move(-0.2f, 0);
 
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         this->animate(32);
-        /*anim.y = Right;*/
         _playerSprite.move(0.2f, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         this->animate(48);
-        /*anim.y = Up;*/
         _playerSprite.move(0, -0.2f);
     }
 
-    /*anim.x++;
-    if (anim.x * (spriteStartPosX) >= spriteSize * 2)
-    {
-        anim.x = 0;
-    }
-
-    _playerSprite.setTextureRect(IntRect(anim.x * spriteSize, anim.y * spriteSize, spriteSize, spriteSize));*/
 }
 
 void Player::drawPlayer(RenderWindow& window)

@@ -12,7 +12,10 @@ public:
 	sf::Sprite getSprite() { return _playerSprite; }
 	
 
-protected: 
+protected:
+	int velocity;
 	sf::Sprite _playerSprite;
+	sf::Clock clock;
+	sf::Vector2i anim;
 };
 
