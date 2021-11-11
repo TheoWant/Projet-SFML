@@ -25,8 +25,8 @@ protected:
 	sf::Vertex enemyVertex;
 
 	sf::Clock clock;
-
-	sf::Vector2f startPos{ 200, 100 };
-	sf::Vector2f endPos{300 ,200};
+	sf::Time timer = sf::seconds(10);
+	sf::Vector2i startPos{ 200, 100 };
+	sf::Vector2i endPos{300 ,200};
 };
 

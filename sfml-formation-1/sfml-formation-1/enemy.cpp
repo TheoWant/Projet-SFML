@@ -23,15 +23,23 @@ void Enemy::moveEnemy()
     Vector2f enemyDirection = enemyPos / norme;*/
 
 
-    if ( enemyPos.x >= endPos.x && enemyPos.y >= endPos.y)
+    if ( enemyPos.x >= endPos.x -0.04 && enemyPos.y >= endPos.y - 0.04)
     {
-        _enemySprite.move((endPos.x - enemyPos.x) * _velocity,  (endPos.y - enemyPos.y)* _velocity );
+        endPos.x = startPos.x;
+        endPos.y = startPos.y;
+        
+        _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y)* _velocity );
         this->animate(80);
+
+        std::cout << "x = " << enemyPos.x << std::endl;
+        std::cout << "y = " << enemyPos.y << std::endl;
     }
-    else if (enemyPos.x <= endPos.x && enemyPos.y <= endPos.y)
+    else if (enemyPos.x <= endPos.x + 0.04 && enemyPos.y <= endPos.y + 0.04)
     {
         _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y) * _velocity);
         this->animate(96);
+        std::cout << "x = " << enemyPos.x << std::endl;
+        std::cout << "y = " << enemyPos.y << std::endl;
     }
 }
 
