@@ -42,7 +42,6 @@ int main()
 
         player.getSprite().setTextureRect(IntRect(48, 0, 16, 16));
         player.movePlayer();
-
         window.clear();
 
         T.draw(window);
