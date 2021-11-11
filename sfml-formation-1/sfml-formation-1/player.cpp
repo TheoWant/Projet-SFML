@@ -53,32 +53,37 @@ void Player::animate(int spritePosY)
 void Player::movePlayer()
 {
     bool isMoving = false;
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         isMoving = true;
         this->animate(0);
+        lastPosY = 0;
         _playerSprite.move(0, 0.2f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         isMoving = true;
         this->animate(16);
+        lastPosY = 16;
         _playerSprite.move(-0.2f, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         isMoving = true;
         this->animate(32);
+        lastPosY = 32;
         _playerSprite.move(0.2f, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         isMoving = true;
         this->animate(48);
+        lastPosY = 48;
         _playerSprite.move(0, -0.2f);
     }
     if (isMoving == false) {
-        _playerSprite.setTextureRect(IntRect(64, 0, 16, 16));
+        _playerSprite.setTextureRect(IntRect(64, lastPosY, 16, 16));
     }
 }
 

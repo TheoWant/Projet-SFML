@@ -14,8 +14,8 @@ public:
 
 protected:
 	int velocity;
+	int lastPosY = 0;
 	sf::Sprite _playerSprite;
 	sf::Clock clock;
-	sf::Vector2i anim;
 };
 
