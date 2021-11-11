@@ -40,7 +40,6 @@ int main()
                 window.close();
         }
 
-        player.getSprite().setTextureRect(IntRect(48, 0, 16, 16));
         player.movePlayer();
         window.clear();
 
