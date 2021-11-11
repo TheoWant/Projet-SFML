@@ -1,5 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include "enemy.h"
 
 using namespace sf;
@@ -18,12 +17,12 @@ void Enemy::moveEnemy()
     
     Vector2f enemyPos = _enemySprite.getPosition();
     
-    // Vector normalization
-    /*float norme = std::sqrt(enemyPos.x * endPos.x + enemyPos.y * endPos.y);
-    Vector2f enemyDirection = enemyPos / norme;*/
+    //Vector normalization
+    float norme = std::sqrt(enemyPos.x * endPos.x + enemyPos.y * endPos.y);
+    Vector2f enemyDirection = enemyPos / norme;
 
 
-    if ( enemyPos.x >= endPos.x -0.04 && enemyPos.y >= endPos.y - 0.04)
+    if ( enemyPos.x >= endPos.x -2 && enemyPos.y >= endPos.y - 2)
     {
         endPos.x = startPos.x;
         endPos.y = startPos.y;
@@ -31,15 +30,28 @@ void Enemy::moveEnemy()
         _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y)* _velocity );
         this->animate(80);
 
+        std::cout << "in if";
         std::cout << "x = " << enemyPos.x << std::endl;
         std::cout << "y = " << enemyPos.y << std::endl;
+
+        std::cout << "endpos x = " << endPos.x << std::endl;
+        std::cout << "endpos y = " << endPos.y << std::endl;
     }
-    else if (enemyPos.x <= endPos.x + 0.04 && enemyPos.y <= endPos.y + 0.04)
+
+    if (enemyPos.x <= endPos.x + 2 && enemyPos.y <= endPos.y + 2)
     {
+        endPos.x = 300;
+        endPos.y = 200;
+
         _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y) * _velocity);
         this->animate(96);
+        
+        std::cout << "in else if\n";
         std::cout << "x = " << enemyPos.x << std::endl;
         std::cout << "y = " << enemyPos.y << std::endl;
+
+        std::cout << "endpos x = " << endPos.x << std::endl;
+        std::cout << "endpos y = " << endPos.y << std::endl;
     }
 }
 
