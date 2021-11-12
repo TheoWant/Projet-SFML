@@ -23,7 +23,7 @@ public:
 
 protected:
 
-	float _velocity = 50.0f;
+	float _speed = 50.0f;
 
 	int pauseTime = 2;
 

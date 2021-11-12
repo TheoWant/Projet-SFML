@@ -50,7 +50,7 @@ void Enemy::moveEnemy()
         {   
             pause = 0;
             _isMoving = false;
-            _velocity = 0;
+            _speed = 0;
             this->animate(64);
         }
 
@@ -59,7 +59,7 @@ void Enemy::moveEnemy()
             endPos.x = startPos.x;
             endPos.y = startPos.y;
 
-            _enemySprite.move((enemyNormalized)*_velocity * deltaTime);
+            _enemySprite.move((enemyNormalized)*_speed * deltaTime);
             this->animate(80);
         }
 
@@ -68,7 +68,7 @@ void Enemy::moveEnemy()
             endPos.x = 300;
             endPos.y = 200;
 
-            _enemySprite.move((enemyNormalized)*_velocity * deltaTime);
+            _enemySprite.move((enemyNormalized)*_speed * deltaTime);
             this->animate(96);
         }
     }
@@ -78,7 +78,7 @@ void Enemy::moveEnemy()
     {   
         time = 0;
         _isMoving = true;
-        _velocity = 50.0f;
+        _speed = 50.0f;
     }
     else 
     {
