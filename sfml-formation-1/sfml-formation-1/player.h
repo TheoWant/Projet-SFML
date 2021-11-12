@@ -7,6 +7,7 @@ public:
 	void loadPlayer(sf::Texture& t);
 	void drawPlayer(sf::RenderWindow& window);
 	void movePlayer();
+	void Life(sf::RenderWindow& window);
 	void animate(int spritePosY);
 
 	sf::Sprite getSprite() { return _playerSprite; }

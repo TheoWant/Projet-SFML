@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include "enemy.h"
 
 using namespace sf;
+
 
 void Enemy::loadEnemy(Texture& enemyTexture)
 {
@@ -13,33 +13,48 @@ void Enemy::loadEnemy(Texture& enemyTexture)
     _enemySprite.setPosition(startPos.x, startPos.y);
 }
 
+Vector2f Enemy::normalize(Vector2f vecteur)
+{
+    float length = std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
+    return vecteur / length;
+}
+
+//void update(float delta)
+//{
+//    Vector2f enemyWay;
+//    std::vector<Vector2f> coord = { Vector2f(200, 100), Vector2f(250, 150), Vector2f(300, 200) };
+//}
+
+
 void Enemy::moveEnemy()
 {
-    
     Vector2f enemyPos = _enemySprite.getPosition();
-    
-    // Vector normalization
-    /*float norme = std::sqrt(enemyPos.x * endPos.x + enemyPos.y * endPos.y);
-    Vector2f enemyDirection = enemyPos / norme;*/
+    Vector2f enemyNormalized = normalize(endPos - enemyPos);
+    _isMoving = false;
 
-
-    if ( enemyPos.x >= endPos.x -0.04 && enemyPos.y >= endPos.y - 0.04)
+    if (enemyPos.x >= endPos.x - 1 && enemyPos.y >= endPos.y - 1)
     {
+        _isMoving = true;
         endPos.x = startPos.x;
         endPos.y = startPos.y;
-        
-        _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y)* _velocity );
-        this->animate(80);
 
-        std::cout << "x = " << enemyPos.x << std::endl;
-        std::cout << "y = " << enemyPos.y << std::endl;
+        _enemySprite.move((enemyNormalized)*_velocity);
+        this->animate(80);
     }
-    else if (enemyPos.x <= endPos.x + 0.04 && enemyPos.y <= endPos.y + 0.04)
+
+    if (enemyPos.x <= endPos.x + 1 && enemyPos.y <= endPos.y + 1)
     {
-        _enemySprite.move((endPos.x - enemyPos.x) * _velocity, (endPos.y - enemyPos.y) * _velocity);
+        _isMoving = true;
+        endPos.x = 300;
+        endPos.y = 200;
+
+        _enemySprite.move((enemyNormalized)*_velocity);
         this->animate(96);
-        std::cout << "x = " << enemyPos.x << std::endl;
-        std::cout << "y = " << enemyPos.y << std::endl;
+    }
+
+    if (_isMoving == false)
+    {
+
     }
 }
 
@@ -51,7 +66,7 @@ void Enemy::animate(int spritePosY)
 
     float elapsedTimeInSeconds = clock.getElapsedTime().asSeconds();
 
-    if (elapsedTimeInSeconds > 0.1f)
+    if (elapsedTimeInSeconds > 0.3f)
     {
         if (enemyRect.left == 128)
         {

@@ -17,8 +17,8 @@ int main()
     RenderWindow window(sf::VideoMode(550, 380), "SFML works!");
     Tilemap T;
     Texture maptexture, enemyTexture, playerTexture;
-
     Player player;
+
     Enemy ghost;
 
     Vector2i anim(48, 0);
@@ -30,7 +30,6 @@ int main()
     player.loadPlayer(playerTexture);
     ghost.loadEnemy(enemyTexture);
    
-
     while (window.isOpen())
     {
         sf::Event event;
@@ -41,11 +40,12 @@ int main()
         }
 
         player.movePlayer();
+        ghost.moveEnemy();
         window.clear();
-
         T.draw(window);
         window.draw(ghost.getSprite());
         window.draw(player.getSprite());
+        player.Life(window);
         window.display();
         
     }
