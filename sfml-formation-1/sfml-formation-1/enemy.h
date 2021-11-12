@@ -31,7 +31,7 @@ protected:
 
 	sf::Sprite _enemySprite;
 
-	sf::Vertex enemyVertex;
+    sf::Vertex enemyVertex;
 
 	sf::Clock animClock;
 	sf::Clock movementClock;

@@ -26,6 +26,7 @@ int main()
     weaponTexture.loadFromFile("sword_normal.png");
     
     Player player;
+
     Enemy ghost;
     Weapon sword;
 
@@ -40,7 +41,6 @@ int main()
 
     float time = timer.getElapsedTime().asSeconds();
    
-
     while (window.isOpen())
     {
         sf::Event event;
@@ -57,7 +57,6 @@ int main()
         ghost.moveEnemy();
 
         window.clear();
-
         T.draw(window);
         player.drawPlayer(window);
         ghost.draw(window);

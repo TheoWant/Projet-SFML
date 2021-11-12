@@ -1,8 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
+#include "enemy.h"
 #include "weapon.h"
 
+using namespace std;
 using namespace sf;
+typedef Vector2f vec2;
+
+int playerLife = 4;
+
+
 
 void Player::loadPlayer(Texture& playerTexture)
 {
@@ -92,7 +99,38 @@ void Player::movePlayer()
     if (isMoving == false) {
         _playerSprite.setTextureRect(IntRect(64, lastPosY, 16, 16));
     }
+
+
+    if (_playerSprite.getPosition().x < -10){
+        _playerSprite.setPosition(-10, _playerSprite.getPosition().y);
+    }
+    if (_playerSprite.getPosition().y < 0) {
+        _playerSprite.setPosition(_playerSprite.getPosition().x, 0);
+    }
+    if (_playerSprite.getPosition().x > 510) {
+        _playerSprite.setPosition(510, _playerSprite.getPosition().y);
+    }
+    if (_playerSprite.getPosition().y > 332) {
+        _playerSprite.setPosition(_playerSprite.getPosition().x, 332);
+    }
 }
+
+void Player::Life(sf::RenderWindow& window) {
+    sf::VertexArray quad(sf::Quads, 4);
+
+    quad[0].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 25);
+    quad[1].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 20);
+    quad[2].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 20);
+    quad[3].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 25);
+
+    quad[0].color = sf::Color::Green;
+    quad[1].color = sf::Color::Green;
+    quad[2].color = sf::Color::Green;
+    quad[3].color = sf::Color::Green;
+
+    window.draw(quad);
+}
+
 
 
 
