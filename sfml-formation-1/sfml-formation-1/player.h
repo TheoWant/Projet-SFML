@@ -18,7 +18,7 @@ public:
 	sf::Vector2f normalize(sf::Vector2f vecteur);
 
 protected:
-	float _velocity = 60.0f;
+	float _speed = 60.0f;
 	int lastPosY = 0;
 
 	sf::Sprite _playerSprite;
