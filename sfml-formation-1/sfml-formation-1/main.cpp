@@ -39,6 +39,7 @@ int main()
                 window.close();
         }
 
+
         player.movePlayer();
         ghost.moveEnemy();
         window.clear();
