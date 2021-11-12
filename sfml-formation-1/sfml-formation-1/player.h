@@ -1,4 +1,6 @@
 #pragma once
+#include "weapon.h"
+
 
 class Player
 
@@ -9,13 +11,19 @@ public:
 	void movePlayer();
 	void animate(int spritePosY);
 
-	sf::Sprite getSprite() { return _playerSprite; }
-	
+	sf::Vector2f getPlayerPosition();
+
+	sf::Sprite getSprite() { return _playerSprite; };
+	sf::Vector2f normalize(sf::Vector2f vecteur);
 
 protected:
-	int velocity;
+	float _velocity = 60.0f;
 	int lastPosY = 0;
+
 	sf::Sprite _playerSprite;
+
 	sf::Clock clock;
+	sf::Clock movementClock;
+	sf::Time dt;
 };
 
