@@ -59,6 +59,7 @@ int main()
         window.clear();
         T.draw(window);
         player.drawPlayer(window);
+        player.pickUp(sword);
         player.Life(window);
         ghost.draw(window);
         sword.drawWeapon(window);
