@@ -16,3 +16,8 @@ void Weapon::loadWeapon(Texture& weaponTexture)
     _weaponSprite.scale(1, 1);
     _weaponSprite.setPosition(200, 300);
 }
+
+sf::Vector2f Weapon::getWeaponPosition()
+{
+    return _weaponSprite.getPosition();
+}
