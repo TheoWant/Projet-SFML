@@ -99,19 +99,19 @@ void Player::movePlayer()
         lastPosY = 0;
         _playerSprite.move(0, _speed * deltaTime);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        isMoving = true;
-        this->animate(16);
-        lastPosY = 16;
-        _playerSprite.move(-_speed * deltaTime, 0);
-    }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         isMoving = true;
         this->animate(32);
         lastPosY = 32;
         _playerSprite.move(_speed * deltaTime, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        isMoving = true;
+        this->animate(16);
+        lastPosY = 16;
+        _playerSprite.move(-_speed * deltaTime, 0);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
@@ -157,7 +157,6 @@ void Player::Life(sf::RenderWindow& window) {
 
     window.draw(quad);
 }
-
 
 
 
