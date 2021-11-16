@@ -13,20 +13,18 @@ typedef Vector2f vec2;
 typedef Vector2i vec2i;
 
 
-
 int main()
 {
     RenderWindow window(sf::VideoMode(550, 380), "SFML works!");
     
-    Tilemap T;
+    Tilemap T; 
+    Player player;
     Texture maptexture, enemyTexture, playerTexture, weaponTexture;
 
     enemyTexture.loadFromFile("characters.png");
     maptexture.loadFromFile("foresttiles2-t.png");
     playerTexture.loadFromFile("characters.png");
     weaponTexture.loadFromFile("sword_normal.png");
-    
-    Player player;
 
     Enemy ghost;
     Weapon sword;
@@ -38,7 +36,14 @@ int main()
     sword.loadWeapon(weaponTexture);
 
     View playerView(Vector2f(0.0f, 0.0f), Vector2f(200.0f, 200.0f));
+
+    Clock timer;
+
+    float time = timer.getElapsedTime().asSeconds();
    
+    bool recupere = false;
+    
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -47,24 +52,31 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
+        int playerPosX = player.getPlayerPosition().x;
+        int playerPosY = player.getPlayerPosition().y;
         
         player.movePlayer();
         playerView.setCenter(player.getPlayerPosition());
-
+        int distance_x = sqrt((player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - sword.getWeaponPosition().x) + (player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - player.getPlayerPosition().y));
+        int distance_y = sqrt((player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - sword.getWeaponPosition().y) + (player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - player.getPlayerPosition().x));
         ghost.moveEnemy();
 
         window.clear();
 
+        if (distance_x < 20 && distance_y < 30) {
+            sword.pickUp();
+            recupere = true;
+        }
         T.draw(window);
-        player.drawPlayer(window);
-        player.pickUp(sword);
-        player.Life(window);
         ghost.draw(window);
-        sword.drawWeapon(window);
-
-        window.display();
+        int LastPosY = player.lastPosY;
+        sword.Animate(window, weaponTexture, playerPosX, playerPosY, LastPosY);
+        player.drawPlayer(window);
+        player.Life(window);
+        if (recupere == false){sword.drawWeapon(window);}
         
+        window.display();
+        window.clear();
     }
 
     return 0;
