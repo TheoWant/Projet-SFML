@@ -73,6 +73,7 @@ int main()
         sword.Animate(window, weaponTexture, playerPosX, playerPosY, LastPosY);
         player.drawPlayer(window);
         player.Life(window);
+        player.pickUp(sword);
         if (recupere == false){sword.drawWeapon(window);}
         
         window.display();
