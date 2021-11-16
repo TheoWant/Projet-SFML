@@ -134,4 +134,5 @@ void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, int playerPos
         window.draw(_weaponSprite);
 
     }
+    window.draw(_weaponSprite);
 }

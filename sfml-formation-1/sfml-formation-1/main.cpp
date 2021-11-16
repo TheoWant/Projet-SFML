@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "weapon.h"
+#include "vehicle.h"
 
 using namespace std;
 using namespace sf;
@@ -27,6 +28,7 @@ int main()
 
     Enemy ghost;
     Weapon sword;
+    Vehicle horse;
 
     T.loadLevel(maptexture);
     player.loadPlayer(playerTexture);
@@ -68,6 +70,7 @@ int main()
         sword.Animate(window, weaponTexture, playerPosX, playerPosY, LastPosY);
         player.drawPlayer(window);
         player.Life(window);
+        player.pickUp(sword);
         if (recupere == false){sword.drawWeapon(window);}
         
         window.display();

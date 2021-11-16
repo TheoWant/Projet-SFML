@@ -1,7 +1,9 @@
 #pragma once
-
+#include "weapon.h";
 
 class Weapon;
+class Sprite;
+class Enemy;
 
 class Player
 
@@ -12,8 +14,11 @@ public:
 	void movePlayer();
 
 	void pickUp(Weapon& weapon);
+
 	void Life(sf::RenderWindow& window);
 	void animate(int spritePosY);
+
+	void attack(Enemy& enemy);
 
 	float length(sf::Vector2f vecteur);
 
@@ -23,11 +28,14 @@ public:
 	sf::Vector2f normalize(sf::Vector2f vecteur);
 	int lastPosY = 0;
 protected:
+
 	float _speed = 60.0f;
 	sf::Sprite _playerSprite;
 
 	sf::Clock clock;
 	sf::Clock movementClock;
 	sf::Time dt;
+
+	Weapon _weapon;
 };
 
