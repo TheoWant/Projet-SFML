@@ -16,11 +16,17 @@ void Enemy::loadEnemy(Texture& enemyTexture)
     _enemySprite.setPosition(startPos.x, startPos.y);
 }
 
+float Enemy::length(Vector2f vecteur)
+{
+    return std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
+}
+
 Vector2f Enemy::normalize(Vector2f vecteur)
 {
-    float length = std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
-    return vecteur / length;
+    float vectLength = length(vecteur);
+    return vecteur / vectLength;
 }
+
 
 //void update(float delta)
 //{
@@ -41,13 +47,10 @@ void Enemy::moveEnemy()
     time += deltaTime;
     pause += deltaTime;
 
-    std::cout << deltaTime << std::endl;
-
     if (_isMoving == true)
     {
-        std::cout << "timer " << time << std::endl;
-        if (time > 2.85) 
-        {   
+        if (time > travelTime)
+        {
             pause = 0;
             _isMoving = false;
             _speed = 0;

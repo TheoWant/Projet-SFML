@@ -11,12 +11,13 @@ public:
 	void moveEnemy();
 	void pauseEnemy();
 	
+	
 	void update(float delta);
 
 	void draw(sf::RenderWindow& window);
 
 	float interp2d(sf::Vector2f vec1, sf::Vector2f vec2);
-
+	float length(sf::Vector2f vecteur);
 	sf::Vector2f normalize(sf::Vector2f vecteur);
 
 	sf::Sprite getSprite() { return _enemySprite; };
@@ -46,6 +47,7 @@ protected:
 	sf::Vector2f startPos{ 200, 100 };
 	sf::Vector2f endPos{300 ,200};
 
-	
+	float _vecLength = length(endPos - startPos);
+	float travelTime = _vecLength / _speed;
 };
 

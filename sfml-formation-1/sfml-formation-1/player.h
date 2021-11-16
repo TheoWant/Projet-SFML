@@ -26,5 +26,6 @@ protected:
 	sf::Clock clock;
 	sf::Clock movementClock;
 	sf::Time dt;
+
 };
 

@@ -41,6 +41,8 @@ int main()
 
     float time = timer.getElapsedTime().asSeconds();
    
+    
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -53,16 +55,19 @@ int main()
         
         player.movePlayer();
         playerView.setCenter(player.getPlayerPosition());
-
+        int distance_x = sqrt((player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - sword.getWeaponPosition().x) + (player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - player.getPlayerPosition().y));
+        int distance_y = sqrt((player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - sword.getWeaponPosition().y) + (player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - player.getPlayerPosition().x));
+        
         ghost.moveEnemy();
-
+        if (distance_x < 20 && distance_y < 30) {
+            sword.pickUp();
+        }
         window.clear();
         T.draw(window);
         player.drawPlayer(window);
-        player.Life(window);
         ghost.draw(window);
+        player.Life(window);
         sword.drawWeapon(window);
-
         window.display();
         
     }

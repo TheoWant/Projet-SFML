@@ -10,7 +10,6 @@ typedef Vector2f vec2;
 int playerLife = 4;
 
 
-
 void Player::loadPlayer(Texture& playerTexture)
 {
     playerTexture.loadFromFile("characters.png");
@@ -130,7 +129,6 @@ void Player::Life(sf::RenderWindow& window) {
 
     window.draw(quad);
 }
-
 
 
 
