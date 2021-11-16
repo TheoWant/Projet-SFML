@@ -40,8 +40,6 @@ int main()
     Clock timer;
 
     float time = timer.getElapsedTime().asSeconds();
-   
-    bool recupere = false;
     
 
     while (window.isOpen())
@@ -54,27 +52,28 @@ int main()
         }
         int playerPosX = player.getPlayerPosition().x;
         int playerPosY = player.getPlayerPosition().y;
-        
+        int LastPosY = player.getLastPosY();
+
         player.movePlayer();
         playerView.setCenter(player.getPlayerPosition());
-        int distance_x = sqrt((player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - sword.getWeaponPosition().x) + (player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - player.getPlayerPosition().y));
-        int distance_y = sqrt((player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - sword.getWeaponPosition().y) + (player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - player.getPlayerPosition().x));
+        
         ghost.moveEnemy();
-
         window.clear();
 
-        if (distance_x < 20 && distance_y < 30) {
-            sword.pickUp();
-            recupere = true;
-        }
+        
         T.draw(window);
         ghost.draw(window);
-        int LastPosY = player.lastPosY;
-        sword.Animate(window, weaponTexture, playerPosX, playerPosY, LastPosY);
+        
+        sword.Animate(window, weaponTexture, player, LastPosY);
         player.drawPlayer(window);
         player.Life(window);
         player.pickUp(sword);
-        if (recupere == false){sword.drawWeapon(window);}
+
+        if (player.hasWeapon() == false)
+        {
+            sword.drawWeapon(window);
+        }
+
         
         window.display();
         window.clear();
