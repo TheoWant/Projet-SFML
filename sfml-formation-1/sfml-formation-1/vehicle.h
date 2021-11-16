@@ -3,7 +3,7 @@ class Vehicle
 {
 
 public:
-	void loadVehicle(Texture& vehicleTexture);
+	void loadVehicle(sf::Texture& vehicleTexture);
 
 protected:
 
