@@ -6,12 +6,8 @@
 
 using namespace sf; 
 
-bool hasWeapon = false;
-bool attack = false;
-float angleStartB = -20;    //Bottom
-float angleStartT = 170;    //Top
-float angleStartR = -80;    //Rigth
-float angleStartL = -120;    //Left
+
+
 
 void Weapon::drawWeapon(RenderWindow& window)
 {
@@ -26,8 +22,10 @@ void Weapon::loadWeapon(Texture& weaponTexture)
     _weaponSprite.setPosition(200, 300);
 }
 
-void Weapon::pickUp() {
-    hasWeapon = true;
+void Weapon::setHasWeapon(bool b)
+{
+    b = true;
+    hasWeapon = b;
 }
 
 sf::Vector2f Weapon::getWeaponPosition()
@@ -35,28 +33,41 @@ sf::Vector2f Weapon::getWeaponPosition()
     return _weaponSprite.getPosition();
 }
 
-bool animation = false;
+//void Weapon::attackAnim(bool anim, float angleStart, float angleEnd, int lastPosY)
+//{
+//    if (animation == true && angleEnd != angleStart && lastPosY == lastPosY) {
+//        _weaponSprite.setOrigin(-10, -10);
+//        angleStart += 0.3;
+//        _weaponSprite.setRotation(angleStart);
+//
+//        if (angleStart >= angleEnd) {
+//            angleStart = -20;
+//            animation = false;
+//        }
+//    }
+//}
 
-void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, int playerPosX, int playerPosY, int LastPosY) {
+
+void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, Player& player, int LastPosY) {
     
-    if (hasWeapon == true){
+    if (player.hasWeapon() == true){
         if(LastPosY == 0){
-            _weaponSprite.setPosition(playerPosX + 22 , playerPosY + 12);
+            _weaponSprite.setPosition(player.getPlayerPosition().x + 22 , player.getPlayerPosition().y + 12);
             _weaponSprite.setOrigin(0, 0);
             _weaponSprite.setRotation(340);
         }
-        if (LastPosY == 32) {
-            _weaponSprite.setPosition(playerPosX + 25, playerPosY + 12);
+        if(LastPosY == 32) {
+            _weaponSprite.setPosition(player.getPlayerPosition().x + 25, player.getPlayerPosition().y + 12);
             _weaponSprite.setOrigin(0, 0);
             _weaponSprite.setRotation(0);
         }
         if (LastPosY == 16) {
-            _weaponSprite.setPosition(playerPosX - 10, playerPosY + 40);
+            _weaponSprite.setPosition(player.getPlayerPosition().x - 10, player.getPlayerPosition().y + 40);
             _weaponSprite.setOrigin(0, 0);
             _weaponSprite.setRotation(270);
         }
         if (LastPosY == 48) {
-            _weaponSprite.setPosition(playerPosX + 15, playerPosY + 12);
+            _weaponSprite.setPosition(player.getPlayerPosition().x + 15, player.getPlayerPosition().y + 12);
             _weaponSprite.setOrigin(0, 0);
             _weaponSprite.setRotation(320);
         }
@@ -88,34 +99,33 @@ void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, int playerPos
             _weaponSprite.setOrigin(-10, -10);
             angleStartB += 0.3;
             _weaponSprite.setRotation(angleStartB);
+
             if (angleStartB >= angleEnd) {
                 angleStartB = -20;
                 animation = false;
             }
-
         }
 
         if (animation == true && angleEnd != angleStartR && LastPosY == 32) { // Rigth animation
             _weaponSprite.setOrigin(-10, -10);
             angleStartR += 0.3;
             _weaponSprite.setRotation(angleStartR);
+
             if (angleStartR >= angleEnd) {
                 angleStartR = -80;
                 animation = false;
             }
-
         }
 
         if (animation == true && angleEnd != angleStartL && LastPosY == 16) {   // Left animation
             _weaponSprite.setOrigin(-10, 10);
-            _weaponSprite.setPosition(playerPosX + 20, playerPosY + 40);
+            _weaponSprite.setPosition(player.getPlayerPosition().x + 20, player.getPlayerPosition().y + 40);
             angleStartL -= 0.3;
             _weaponSprite.setRotation(angleStartL);
             if (angleStartL <= angleEnd) {
                 angleStartL = -120;
                 animation = false;
             }
-
         }
 
         if (animation == true && angleEnd != angleStartT && LastPosY == 48) { // Bottom animation
@@ -128,10 +138,6 @@ void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, int playerPos
             }
 
         }
-        
-        //std::cout << LastPosY << "\n";
-        /*std::cout << _weaponSprite.getOrigin().x<< "," << _weaponSprite.getOrigin().y << "\n";*/
-        window.draw(_weaponSprite);
 
     }
     window.draw(_weaponSprite);
