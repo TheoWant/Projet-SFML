@@ -1,8 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "enemy.h"
 #include <thread>
-#include <chrono>
-
 
 using namespace sf;
 
@@ -84,6 +82,7 @@ void Enemy::moveEnemy()
         this->animate(64);
     }
 }
+
 
 void Enemy::animate(int spritePosY)
 {

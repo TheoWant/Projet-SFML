@@ -53,7 +53,6 @@ float Player::length(Vector2f vecteur)
     return std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
 }
 
-
 Vector2f Player::normalize(Vector2f vecteur)
 {
     float length = std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);

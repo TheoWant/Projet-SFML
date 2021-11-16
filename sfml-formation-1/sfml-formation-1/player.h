@@ -11,8 +11,6 @@ public:
 	void drawPlayer(sf::RenderWindow& window);
 	void movePlayer();
 
-	/*bool hasWeapon() { return weapon != nullptr; };*/
-
 	void pickUp(Weapon& weapon);
 	void Life(sf::RenderWindow& window);
 	void animate(int spritePosY);

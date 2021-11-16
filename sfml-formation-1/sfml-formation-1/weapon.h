@@ -9,8 +9,12 @@ public:
 	sf::Vector2f getWeaponPosition();
 
 protected:
+	int _attackSpeed = 20;
 	int _damage = 10;
 	sf::Sprite _weaponSprite;
+	sf::Clock timer;
+	sf::Time deltaTime;
 
+	float angleEnd;
 };
 
