@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace sf;
+
 typedef Vector2f vec2;
 
 void Player::loadPlayer(Texture& playerTexture)
@@ -16,7 +17,7 @@ void Player::loadPlayer(Texture& playerTexture)
 }
 
 
-sf::Vector2f Player::getPlayerPosition()
+Vector2f Player::getPlayerPosition()
 {
     return _playerSprite.getPosition();
 }
@@ -62,8 +63,28 @@ Vector2f Player::normalize(Vector2f vecteur)
 
 void Player::pickUp(Weapon& weapon)
 {
-    float distance = length(_playerSprite.getPosition() - weapon.getWeaponPosition());
-    std::cout << distance << std::endl;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
+    {
+        if (length(_playerSprite.getPosition() - weapon.getWeaponPosition()) <= 16)
+        {
+            _weapon = weapon;
+
+            _weapon.getSprite().setPosition(_playerSprite.getPosition().x, _playerSprite.getPosition().y);
+            std::cout << "prise..." << std::endl;
+        }
+        else
+        {
+            std::cout << "weapon" << std::endl;
+            std::cout << length(_playerSprite.getPosition() - weapon.getWeaponPosition()) << std::endl;
+        }
+    }
+}
+
+
+
+void Player::attack(Enemy& enemy)
+{
+    
 }
 
 void Player::movePlayer()
@@ -99,6 +120,9 @@ void Player::movePlayer()
         lastPosY = 48;
         _playerSprite.move(0, -_speed * deltaTime);
     }
+
+    
+
     if (isMoving == false) {
         _playerSprite.setTextureRect(IntRect(64, lastPosY, 16, 16));
     }
@@ -140,4 +164,5 @@ void Player::Life(sf::RenderWindow& window) {
 void Player::drawPlayer(RenderWindow& window)
 {
     window.draw(_playerSprite);
+    window.draw(_weapon.getSprite());
 }

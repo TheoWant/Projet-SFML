@@ -7,11 +7,11 @@ public:
 	
 	sf::Vector2f getWeaponPosition();
 
+	sf::Sprite getSprite() { return _weaponSprite; };
+
 protected:
 	int _damage = 10;
 	sf::Sprite _weaponSprite;
-
-
 
 };
 

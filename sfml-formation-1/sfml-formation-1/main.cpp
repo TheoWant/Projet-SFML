@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "weapon.h"
+#include "vehicle.h"
 
 using namespace std;
 using namespace sf;
@@ -29,6 +30,7 @@ int main()
 
     Enemy ghost;
     Weapon sword;
+    Vehicle horse;
 
     T.loadLevel(maptexture);
     player.loadPlayer(playerTexture);
@@ -36,10 +38,6 @@ int main()
     sword.loadWeapon(weaponTexture);
 
     View playerView(Vector2f(0.0f, 0.0f), Vector2f(200.0f, 200.0f));
-
-    Clock timer;
-
-    float time = timer.getElapsedTime().asSeconds();
    
     while (window.isOpen())
     {
@@ -57,6 +55,7 @@ int main()
         ghost.moveEnemy();
 
         window.clear();
+
         T.draw(window);
         player.drawPlayer(window);
         player.pickUp(sword);
