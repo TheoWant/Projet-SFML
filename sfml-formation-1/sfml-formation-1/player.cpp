@@ -7,9 +7,6 @@ using namespace std;
 using namespace sf;
 typedef Vector2f vec2;
 
-int playerLife = 4;
-
-
 void Player::loadPlayer(Texture& playerTexture)
 {
     playerTexture.loadFromFile("characters.png");
@@ -49,10 +46,13 @@ void Player::animate(int spritePosY)
         clock.restart();
 
     }
-
-
-    
 }
+
+float Player::length(Vector2f vecteur)
+{
+    return std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
+}
+
 
 Vector2f Player::normalize(Vector2f vecteur)
 {
@@ -60,7 +60,11 @@ Vector2f Player::normalize(Vector2f vecteur)
     return vecteur / length;
 }
 
-
+void Player::pickUp(Weapon& weapon)
+{
+    float distance = length(_playerSprite.getPosition() - weapon.getWeaponPosition());
+    std::cout << distance << std::endl;
+}
 
 void Player::movePlayer()
 {

@@ -18,7 +18,7 @@ void Enemy::loadEnemy(Texture& enemyTexture)
 
 float Enemy::length(Vector2f vecteur)
 {
-    return std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
+   return std::sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y);
 }
 
 Vector2f Enemy::normalize(Vector2f vecteur)
@@ -28,11 +28,6 @@ Vector2f Enemy::normalize(Vector2f vecteur)
 }
 
 
-//void update(float delta)
-//{
-//    Vector2f enemyWay;
-//    std::vector<Vector2f> coord = { Vector2f(200, 100), Vector2f(250, 150), Vector2f(300, 200) };
-//}
 
 
 void Enemy::moveEnemy()
@@ -47,10 +42,11 @@ void Enemy::moveEnemy()
     time += deltaTime;
     pause += deltaTime;
 
+
     if (_isMoving == true)
     {
-        if (time > travelTime)
-        {
+        if (time > travelTime) 
+        {   
             pause = 0;
             _isMoving = false;
             _speed = 0;
@@ -62,7 +58,7 @@ void Enemy::moveEnemy()
             endPos.x = startPos.x;
             endPos.y = startPos.y;
 
-            _enemySprite.move((enemyNormalized)*_speed * deltaTime);
+            _enemySprite.move((enemyNormalized) * _speed * deltaTime);
             this->animate(80);
         }
 

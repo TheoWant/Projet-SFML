@@ -13,5 +13,7 @@ protected:
 	int _damage = 10;
 	sf::Sprite _weaponSprite;
 
+
+
 };
 

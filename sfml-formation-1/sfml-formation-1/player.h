@@ -1,6 +1,7 @@
 #pragma once
-#include "weapon.h"
 
+
+class Weapon;
 
 class Player
 
@@ -9,8 +10,14 @@ public:
 	void loadPlayer(sf::Texture& t);
 	void drawPlayer(sf::RenderWindow& window);
 	void movePlayer();
+
+	/*bool hasWeapon() { return weapon != nullptr; };*/
+
+	void pickUp(Weapon& weapon);
 	void Life(sf::RenderWindow& window);
 	void animate(int spritePosY);
+
+	float length(sf::Vector2f vecteur);
 
 	sf::Vector2f getPlayerPosition();
 
@@ -27,5 +34,6 @@ protected:
 	sf::Clock movementClock;
 	sf::Time dt;
 
+	Weapon& weapon;
 };
 
