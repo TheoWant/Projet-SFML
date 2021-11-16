@@ -60,16 +60,16 @@ Vector2f Player::normalize(Vector2f vecteur)
     return vecteur / length;
 }
 
+
 void Player::pickUp(Weapon& weapon)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
     {
-        if (length(_playerSprite.getPosition() - weapon.getWeaponPosition()) <= 16)
+        if (length(_playerSprite.getPosition() - weapon.getWeaponPosition()) <= 20)
         {
-            _weapon = weapon;
-
-            _weapon.getSprite().setPosition(_playerSprite.getPosition().x, _playerSprite.getPosition().y);
-            std::cout << "prise..." << std::endl;
+            bool setTrue = true;
+            _weapon = new Weapon(weapon);
+            _weapon->getSprite().setPosition(_playerSprite.getPosition().x, _playerSprite.getPosition().y);
         }
         else
         {
@@ -162,5 +162,5 @@ void Player::Life(sf::RenderWindow& window) {
 void Player::drawPlayer(RenderWindow& window)
 {
     window.draw(_playerSprite);
-    window.draw(_weapon.getSprite());
+    
 }
