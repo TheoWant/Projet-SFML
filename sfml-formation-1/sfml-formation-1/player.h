@@ -23,17 +23,13 @@ public:
 
 	sf::Sprite getSprite() { return _playerSprite; };
 	sf::Vector2f normalize(sf::Vector2f vecteur);
-
+	int lastPosY = 0;
 protected:
 	float _speed = 60.0f;
-	int lastPosY = 0;
-
 	sf::Sprite _playerSprite;
 
 	sf::Clock clock;
 	sf::Clock movementClock;
 	sf::Time dt;
-
-	Weapon& weapon;
 };
 
