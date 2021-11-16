@@ -60,6 +60,9 @@ int main()
         int distance_x = sqrt((player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - sword.getWeaponPosition().x) + (player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - player.getPlayerPosition().y));
         int distance_y = sqrt((player.getPlayerPosition().y - sword.getWeaponPosition().y) * (player.getPlayerPosition().y - sword.getWeaponPosition().y) + (player.getPlayerPosition().x - sword.getWeaponPosition().x) * (player.getPlayerPosition().x - player.getPlayerPosition().x));
         ghost.moveEnemy();
+
+        window.clear();
+
         if (distance_x < 20 && distance_y < 30) {
             sword.pickUp();
             recupere = true;
