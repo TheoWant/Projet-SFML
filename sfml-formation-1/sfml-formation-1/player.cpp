@@ -25,7 +25,6 @@ Vector2f Player::getPlayerPosition()
 
 void Player::animate(int spritePosY)
 {
-    
     IntRect playerRect(_playerSprite.getTextureRect());
 
     playerRect.top = spritePosY;

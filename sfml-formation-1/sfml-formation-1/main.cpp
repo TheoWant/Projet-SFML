@@ -19,12 +19,13 @@ int main()
     
     Tilemap T; 
     Player player;
-    Texture maptexture, enemyTexture, playerTexture, weaponTexture;
+    Texture maptexture, enemyTexture, playerTexture, weaponTexture, vehicleTexture;
 
     enemyTexture.loadFromFile("characters.png");
     maptexture.loadFromFile("foresttiles2-t.png");
     playerTexture.loadFromFile("characters.png");
     weaponTexture.loadFromFile("sword_normal.png");
+    vehicleTexture.loadFromFile("horse.png");
 
     Enemy ghost;
     Weapon sword;
@@ -34,6 +35,7 @@ int main()
     player.loadPlayer(playerTexture);
     ghost.loadEnemy(enemyTexture);
     sword.loadWeapon(weaponTexture);
+    horse.loadVehicle(vehicleTexture);
 
     View playerView(Vector2f(0.0f, 0.0f), Vector2f(200.0f, 200.0f));
 
@@ -41,6 +43,7 @@ int main()
 
     float time = timer.getElapsedTime().asSeconds();
     bool ghostAlive = true;
+    bool playerOnHorse = false;
 
     while (window.isOpen())
     {
@@ -61,14 +64,21 @@ int main()
         playerView.setCenter(player.getPlayerPosition());
         
         window.clear();
-
-        
         T.draw(window);
-        
+        if (horse.horseBounds().intersects(playerBox)) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                playerOnHorse = true;
+                horse.horseAnimate(playerOnHorse);
+            }
+        }       
         sword.Animate(window, weaponTexture, player, LastPosY);
-        player.drawPlayer(window);
-        player.Life(window);
-        player.pickUp(sword);
+        if (playerOnHorse == false) {
+            player.drawPlayer(window);
+            player.Life(window);
+            player.pickUp(sword);
+        }
+        
+        
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             attack = true;
@@ -90,7 +100,7 @@ int main()
             ghost.draw(window);
             ghost.moveEnemy();
         }
-        
+        horse.drawHorse(window);
         window.display();
         window.clear();
     }
