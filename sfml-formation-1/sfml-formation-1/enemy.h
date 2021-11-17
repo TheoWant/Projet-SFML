@@ -9,7 +9,7 @@ public:
 	void loadEnemy(sf::Texture& t);
 	void animate(int spritePosY);
 	void moveEnemy();
-
+	sf::FloatRect getEnemyBounds();
 	void draw(sf::RenderWindow& window);
 	
 	float length(sf::Vector2f vecteur);

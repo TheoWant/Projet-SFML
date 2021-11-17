@@ -25,8 +25,9 @@ Vector2f Enemy::normalize(Vector2f vecteur)
     return vecteur / vectLength;
 }
 
-
-
+sf::FloatRect Enemy::getEnemyBounds() {
+    return _enemySprite.getGlobalBounds();
+}
 
 void Enemy::moveEnemy()
 {

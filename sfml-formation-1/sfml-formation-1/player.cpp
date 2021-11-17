@@ -80,10 +80,8 @@ void Player::pickUp(Weapon& weapon)
 }
 
 
-
-void Player::attack(Enemy& enemy)
-{
-    
+sf::FloatRect Player::getPlayerBounds() {
+    return _playerSprite.getGlobalBounds();
 }
 
 void Player::movePlayer()

@@ -47,10 +47,14 @@ sf::Vector2f Weapon::getWeaponPosition()
 //    }
 //}
 
+sf::FloatRect Weapon::getSwordBounds() {
+    return _weaponSprite.getGlobalBounds();
+}
+
 
 void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, Player& player, int LastPosY) {
     
-    if (player.hasWeapon() == true){
+    if (player.hasWeapon == true){
         if(LastPosY == 0){
             _weaponSprite.setPosition(player.getPlayerPosition().x + 22 , player.getPlayerPosition().y + 12);
             _weaponSprite.setOrigin(0, 0);

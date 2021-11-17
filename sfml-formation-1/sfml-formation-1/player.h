@@ -12,9 +12,9 @@ public:
 	void loadPlayer(sf::Texture& t);
 	void drawPlayer(sf::RenderWindow& window);
 	void movePlayer();
-	
+	sf::FloatRect getPlayerBounds();
 	void pickUp(Weapon& weapon);
-	bool hasWeapon() { return _weapon != nullptr; }
+	bool hasWeapon = false;
 
 	void Life(sf::RenderWindow& window);
 	void animate(int spritePosY);

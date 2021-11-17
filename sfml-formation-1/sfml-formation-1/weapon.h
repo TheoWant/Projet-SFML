@@ -12,7 +12,7 @@ public:
 
 	void setHasWeapon(bool b);
 	bool getHasWeapon() { return hasWeapon; };
-
+	sf::FloatRect getSwordBounds();
 	bool attack();
 	void attackAnim(bool anim, float angleStart, float angleEnd, int lastPosY);
 	void Animate(sf::RenderWindow& window, sf::Texture& weaponTexture, Player& player, int LastPosY);

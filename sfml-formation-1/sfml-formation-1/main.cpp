@@ -40,7 +40,7 @@ int main()
     Clock timer;
 
     float time = timer.getElapsedTime().asSeconds();
-    
+    bool ghostAlive = true;
 
     while (window.isOpen())
     {
@@ -50,30 +50,46 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        bool attack = false;
         int playerPosX = player.getPlayerPosition().x;
         int playerPosY = player.getPlayerPosition().y;
         int LastPosY = player.getLastPosY();
-
+        sf::FloatRect ghostBox = ghost.getEnemyBounds();
+        sf::FloatRect playerBox = player.getPlayerBounds();
+        sf::FloatRect swordBox = sword.getSwordBounds();
         player.movePlayer();
         playerView.setCenter(player.getPlayerPosition());
         
-        ghost.moveEnemy();
         window.clear();
 
         
         T.draw(window);
-        ghost.draw(window);
         
         sword.Animate(window, weaponTexture, player, LastPosY);
         player.drawPlayer(window);
         player.Life(window);
         player.pickUp(sword);
-
-        if (player.hasWeapon() == false)
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+            attack = true;
+        }
+        if (player.hasWeapon == false)
         {
             sword.drawWeapon(window);
         }
+        if (playerBox.intersects(swordBox)) {
+            player.hasWeapon = true;
+        }
 
+        if (attack == true) {
+            if (swordBox.intersects(ghostBox)) {
+                ghostAlive = false;
+            }
+        }
+        if (ghostAlive == true) {
+            ghost.draw(window);
+            ghost.moveEnemy();
+        }
         
         window.display();
         window.clear();
