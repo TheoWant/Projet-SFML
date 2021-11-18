@@ -11,10 +11,8 @@ public:
 	void moveEnemy();
 	sf::FloatRect getEnemyBounds();
 	void draw(sf::RenderWindow& window);
-	
 	float length(sf::Vector2f vecteur);
 	sf::Vector2f normalize(sf::Vector2f vecteur);
-
 	sf::Sprite getSprite() { return _enemySprite; };
 
 protected:

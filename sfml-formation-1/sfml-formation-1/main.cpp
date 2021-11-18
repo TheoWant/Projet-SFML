@@ -44,7 +44,8 @@ int main()
     float time = timer.getElapsedTime().asSeconds();
     bool ghostAlive = true;
     bool playerOnHorse = false;
-
+    float playerHP = 100;
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -53,6 +54,8 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        int NewX = player.getPlayerPosition().x;
+        int NewY = player.getPlayerPosition().y; 
         bool attack = false;
         int playerPosX = player.getPlayerPosition().x;
         int playerPosY = player.getPlayerPosition().y;
@@ -72,12 +75,11 @@ int main()
             }
         }       
         sword.Animate(window, weaponTexture, player, LastPosY);
-        if (playerOnHorse == false) {
+        if (playerOnHorse == false && playerHP > 0) {
             player.drawPlayer(window);
-            player.Life(window);
+            player.Life(window, playerHP);
             player.pickUp(sword);
         }
-        
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
@@ -90,7 +92,29 @@ int main()
         if (playerBox.intersects(swordBox)) {
             player.hasWeapon = true;
         }
-
+        if (ghostAlive == true) {
+            if (playerBox.intersects(ghostBox)) {
+                if (LastPosY == 0) {
+                    NewY -= 40;
+                    playerHP -= 20;
+                }
+                if (LastPosY == 48) {
+                    NewY += 40;
+                    playerHP -= 20;
+                }
+                if (LastPosY == 32) {
+                    NewX -= 40;
+                    playerHP -= 20;
+                }
+                if (LastPosY == 16) {
+                    NewX += 40;
+                    playerHP -= 20;
+               }
+               player.setPlayerPosition(NewX, NewY);
+            }
+        }
+        
+        std::cout << playerHP << "\n";
         if (attack == true) {
             if (swordBox.intersects(ghostBox)) {
                 ghostAlive = false;

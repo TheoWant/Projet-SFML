@@ -22,6 +22,11 @@ Vector2f Player::getPlayerPosition()
     return _playerSprite.getPosition();
 }
 
+void Player::setPlayerPosition(int NewX, int NewY)
+{
+    return _playerSprite.setPosition(NewX, NewY);
+}
+
 
 void Player::animate(int spritePosY)
 {
@@ -138,20 +143,35 @@ void Player::movePlayer()
     }
 }
 
-void Player::Life(sf::RenderWindow& window) {
+void Player::Life(sf::RenderWindow& window, float playerHP) {
     sf::VertexArray quad(sf::Quads, 4);
+    sf::VertexArray quad2(sf::Quads, 4);
+
+    quad2[0].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 25);
+    quad2[1].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 20);
+    quad2[2].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 20);
+    quad2[3].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 25);
 
     quad[0].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 25);
     quad[1].position = sf::Vector2f(_playerSprite.getPosition().x, _playerSprite.getPosition().y - 20);
-    quad[2].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 20);
-    quad[3].position = sf::Vector2f(_playerSprite.getPosition().x + 45, _playerSprite.getPosition().y - 25);
+    quad[2].position = sf::Vector2f(_playerSprite.getPosition().x + 45 * (playerHP / 100), _playerSprite.getPosition().y - 20);
+    quad[3].position = sf::Vector2f(_playerSprite.getPosition().x + 45 * (playerHP / 100), _playerSprite.getPosition().y - 25);
+
+    
 
     quad[0].color = sf::Color::Green;
     quad[1].color = sf::Color::Green;
     quad[2].color = sf::Color::Green;
     quad[3].color = sf::Color::Green;
 
+    quad2[0].color = sf::Color::Red;
+    quad2[1].color = sf::Color::Red;
+    quad2[2].color = sf::Color::Red;
+    quad2[3].color = sf::Color::Red;
+
+    window.draw(quad2);
     window.draw(quad);
+    
 }
 
 
