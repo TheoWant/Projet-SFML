@@ -17,7 +17,7 @@ public:
 	void attackAnim(bool anim, float angleStart, float angleEnd, int lastPosY);
 	void Animate(sf::RenderWindow& window, sf::Texture& weaponTexture, Player& player, int LastPosY, bool playerOnHorse);
 	sf::Vector2f getWeaponPosition();
-
+	
 	sf::Sprite getSprite() { return _weaponSprite; };
 
 protected:
@@ -28,15 +28,15 @@ protected:
 	sf::Time deltaTime;
 
 	bool hasWeapon = false;
-	float angleEnd;
+	double angleEnd = 0;
 
 	/*bool attack = false;*/
-	float angleStartB = -20;    //Bottom
-	float angleStartT = 170;    //Top
-	float angleStartR = -80;    //Rigth
-	float angleStartL = -120;    //Left
+	double angleStartB = -20;    //Bottom
+	double angleStartT = 170;    //Top
+	double angleStartR = -80;    //Rigth
+	double angleStartL = -120;    //Left
 
-	float angleAddition = 0.3;
+	double angleAddition = 0.3;
 	
 	bool animation = false;
 };

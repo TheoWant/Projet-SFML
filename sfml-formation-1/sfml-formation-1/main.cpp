@@ -12,7 +12,6 @@ using namespace sf;
 typedef Vector2f vec2;
 typedef Vector2i vec2i;
 
-
 int main()
 {
     RenderWindow window(sf::VideoMode(550, 380), "SFML works!");
@@ -54,11 +53,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        int NewX = player.getPlayerPosition().x;
-        int NewY = player.getPlayerPosition().y; 
+        float NewX = player.getPlayerPosition().x;
+        float NewY = player.getPlayerPosition().y; 
         bool attack = false;
-        int playerPosX = player.getPlayerPosition().x;
-        int playerPosY = player.getPlayerPosition().y;
         int LastPosY = player.getLastPosY();
         sf::FloatRect ghostBox = ghost.getEnemyBounds();
         sf::FloatRect playerBox = player.getPlayerBounds();
@@ -72,7 +69,12 @@ int main()
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
                 playerOnHorse = true;
             }
-        }       
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+            playerOnHorse = false;
+            player.hasWeapon = false;
+            horse.setTextureBack(vehicleTexture);
+        }
         sword.Animate(window, weaponTexture, player, LastPosY, playerOnHorse);
         if (playerOnHorse == false && playerHP > 0) {
             player.drawPlayer(window);

@@ -121,6 +121,9 @@ void Player::movePlayer()
         lastPosY = 48;
         _playerSprite.move(0, -_speed * deltaTime);
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down) or sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        isMoving = false;
+    }
 
     
 

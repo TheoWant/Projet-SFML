@@ -44,7 +44,7 @@ void Vehicle::animate(int spritePosY)
     }
 }
 
-float posRotate = 0;
+double posRotate = 0;
 
 void Vehicle::horseAnimate(bool playerOnHorse, int lastPosY) {
     if (playerOnHorse == true) {
