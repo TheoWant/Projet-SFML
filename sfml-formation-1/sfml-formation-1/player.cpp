@@ -157,8 +157,6 @@ void Player::Life(sf::RenderWindow& window, float playerHP) {
     quad[2].position = sf::Vector2f(_playerSprite.getPosition().x + 45 * (playerHP / 100), _playerSprite.getPosition().y - 20);
     quad[3].position = sf::Vector2f(_playerSprite.getPosition().x + 45 * (playerHP / 100), _playerSprite.getPosition().y - 25);
 
-    
-
     quad[0].color = sf::Color::Green;
     quad[1].color = sf::Color::Green;
     quad[2].color = sf::Color::Green;

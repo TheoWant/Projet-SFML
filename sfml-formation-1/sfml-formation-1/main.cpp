@@ -71,16 +71,16 @@ int main()
         if (horse.horseBounds().intersects(playerBox)) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
                 playerOnHorse = true;
-                horse.horseAnimate(playerOnHorse);
             }
         }       
-        sword.Animate(window, weaponTexture, player, LastPosY);
+        sword.Animate(window, weaponTexture, player, LastPosY, playerOnHorse);
         if (playerOnHorse == false && playerHP > 0) {
             player.drawPlayer(window);
             player.Life(window, playerHP);
             player.pickUp(sword);
         }
-        
+        horse.horseAnimate(playerOnHorse, LastPosY);
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             attack = true;
@@ -113,8 +113,6 @@ int main()
                player.setPlayerPosition(NewX, NewY);
             }
         }
-        
-        std::cout << playerHP << "\n";
         if (attack == true) {
             if (swordBox.intersects(ghostBox)) {
                 ghostAlive = false;

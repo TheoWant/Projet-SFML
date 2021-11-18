@@ -33,28 +33,14 @@ sf::Vector2f Weapon::getWeaponPosition()
     return _weaponSprite.getPosition();
 }
 
-//void Weapon::attackAnim(bool anim, float angleStart, float angleEnd, int lastPosY)
-//{
-//    if (animation == true && angleEnd != angleStart && lastPosY == lastPosY) {
-//        _weaponSprite.setOrigin(-10, -10);
-//        angleStart += 0.3;
-//        _weaponSprite.setRotation(angleStart);
-//
-//        if (angleStart >= angleEnd) {
-//            angleStart = -20;
-//            animation = false;
-//        }
-//    }
-//}
-
 sf::FloatRect Weapon::getSwordBounds() {
     return _weaponSprite.getGlobalBounds();
 }
 
 
-void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, Player& player, int LastPosY) {
+void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, Player& player, int LastPosY, bool playerOnHorse) {
     
-    if (player.hasWeapon == true){
+    if (player.hasWeapon == true && playerOnHorse == false){
         if(LastPosY == 0){
             _weaponSprite.setPosition(player.getPlayerPosition().x + 22 , player.getPlayerPosition().y + 12);
             _weaponSprite.setOrigin(0, 0);
@@ -132,7 +118,7 @@ void Weapon::Animate(RenderWindow& window, Texture& weaponTexture, Player& playe
             }
         }
 
-        if (animation == true && angleEnd != angleStartT && LastPosY == 48) { // Bottom animation
+        if (animation == true && angleEnd != angleStartT && LastPosY == 48) { // UP animation
             _weaponSprite.setOrigin(-10, -10);
             angleStartT += 0.3;
             _weaponSprite.setRotation(angleStartT);

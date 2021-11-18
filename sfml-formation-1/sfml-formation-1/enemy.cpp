@@ -29,6 +29,9 @@ sf::FloatRect Enemy::getEnemyBounds() {
     return _enemySprite.getGlobalBounds();
 }
 
+
+
+
 void Enemy::moveEnemy()
 {
     Vector2f enemyPos = _enemySprite.getPosition();

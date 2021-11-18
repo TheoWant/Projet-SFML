@@ -15,7 +15,7 @@ public:
 	sf::FloatRect getSwordBounds();
 	bool attack();
 	void attackAnim(bool anim, float angleStart, float angleEnd, int lastPosY);
-	void Animate(sf::RenderWindow& window, sf::Texture& weaponTexture, Player& player, int LastPosY);
+	void Animate(sf::RenderWindow& window, sf::Texture& weaponTexture, Player& player, int LastPosY, bool playerOnHorse);
 	sf::Vector2f getWeaponPosition();
 
 	sf::Sprite getSprite() { return _weaponSprite; };
