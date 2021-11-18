@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "vehicle.h"
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -12,6 +13,7 @@ void Vehicle::loadVehicle(sf::Texture& vehicleTexture)
     _vehiculeSprite.setTexture(vehicleTexture);
     _vehiculeSprite.setTextureRect(IntRect(85, 0, 108, 60));
     _vehiculeSprite.setPosition(350, 50);
+    _vehiculeSprite.setOrigin(11,30);
     _vehiculeSprite.scale(1.7, 1.7);
 }
 
@@ -44,46 +46,51 @@ void Vehicle::animate(int spritePosY)
     }
 }
 
-double posRotate = 0;
 
 void Vehicle::horseAnimate(bool playerOnHorse, int lastPosY) {
     if (playerOnHorse == true) {
         _vehiculeSprite.setTextureRect(IntRect(32, 0, 22, 60));
         bool isMoving = false;
-        float deltaTime = movementClock.restart().asSeconds();
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
         {
             isMoving = true;
             this->animate(0);
             lastPosY = 0;
-            _vehiculeSprite.move(0, _speed * deltaTime);
+            strength = -150;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             isMoving = true;
             this->animate(32);
             lastPosY = 32;
-            posRotate += 0.1;
-            _vehiculeSprite.setRotation(posRotate);
+            posRotate += 0.3 * (3.14/180);
+           
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             isMoving = true;
             this->animate(16);
             lastPosY = 16;
-            posRotate -= 0.1;
-            _vehiculeSprite.setRotation(posRotate);
+            posRotate -= 0.3 * (3.14 / 180);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             isMoving = true;
             this->animate(48);
             lastPosY = 48;
-            _vehiculeSprite.move(0, -_speed * deltaTime);
+            strength = 300;
         }
 
+        float accx = (1 / masse) * strength * cos(posRotate);
+        float accy = (1 / masse) * strength * sin(posRotate);
+        vx = vx + (accx - (alpha / masse) * vx) * 0.01f;
+        vy = vy + (accy - (alpha / masse) * vy) * 0.01f;
 
+        _vehiculeSprite.setRotation(90 + posRotate * 180 / 3.14);
+
+        _vehiculeSprite.move(vx, vy);
+        std::cout << posRotate * 180/3.14 << "\n";
 
         if (isMoving == false) {
             _vehiculeSprite.setTextureRect(IntRect(32, 0, 22, 60));

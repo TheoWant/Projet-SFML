@@ -39,11 +39,13 @@ int main()
     View playerView(Vector2f(0.0f, 0.0f), Vector2f(200.0f, 200.0f));
 
     Clock timer;
+    sf::Time delta;
 
     float time = timer.getElapsedTime().asSeconds();
     bool ghostAlive = true;
     bool playerOnHorse = false;
     float playerHP = 100;
+    
     
     while (window.isOpen())
     {
@@ -53,8 +55,11 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+
         float NewX = player.getPlayerPosition().x;
-        float NewY = player.getPlayerPosition().y; 
+        float NewY = player.getPlayerPosition().y;
+
+        
         bool attack = false;
         int LastPosY = player.getLastPosY();
         sf::FloatRect ghostBox = ghost.getEnemyBounds();
